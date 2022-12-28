@@ -1,2 +1,7 @@
-# videocleanup
-Powershell script that cleans up all videos and moves them to another 
+This PowerShell script moves all video files from the C drive to an external drive, creates a new folder with the current date as the name, and sends an email confirmation when the video files have been moved.
+
+To achieve this, the script first sets the $env:EXTERNAL_DRIVE_LETTER variable to the letter of the external drive where the video files will be moved. It then sets the $smtpServer and $smtpPort variables to the SMTP server and port of the email provider (e.g. "smtp.gmail.com" and 587 for Gmail). The $from and $to variables are set to the sender and recipient email addresses, respectively, and the $subject and $body variables are set to the subject and body of the email.
+
+The script then uses the Get-Credential cmdlet to set the credentials for the SMTP server and the Get-Date cmdlet to get the current date and format it as a string. The destination path for the external drive is set using the $destinationPath variable, and a new folder is created in this path using the New-Item cmdlet with the current date as the name.
+
+The script then gets a list of all video files in the C drive using the Get-ChildItem cmdlet and filters for specific file types (e.g. ".mp4", ".avi", ".mkv", ".mov"). It then uses a foreach loop to iterate through the list of video files and moves each file to the new folder using the Move-Item cmdlet. Finally, the script uses the Send-MailMessage cmdlet to send an email using the $smtpServer, $smtpPort, $credential, $from, $to, $subject, and $body variables.
